@@ -8,7 +8,7 @@ namespace RadioButton
 		{
 			InitializeComponent();
 
-			MainPage = new MySwipePage();
+			MainPage = new MySwipeTab();
 		}
 
 		protected override void OnStart()
