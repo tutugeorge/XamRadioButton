@@ -30,6 +30,9 @@
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
     <EmbeddedResource Include="RadioButtonPage.xaml" />
+    <EmbeddedResource Include="MySwipePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -40,6 +43,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RadioButton.cs" />
+    <Compile Include="MySwipePage.xaml.cs">
+      <DependentUpon>MySwipePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SwipeFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

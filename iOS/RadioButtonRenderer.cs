@@ -4,8 +4,9 @@ using UIKit;
 using RadioButton;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using System.ComponentModel;
 
-[assembly: ExportRenderer(typeof(RadioButton), typeof(RadioButtonRenderer))]
+[assembly: ExportRenderer(typeof(RadioControl), typeof(RadioButtonRenderer))]
 namespace RadioButton.iOS
 {
 	public class RadioButtonRenderer : ButtonRenderer
@@ -17,7 +18,7 @@ namespace RadioButton.iOS
 
 			if (Control != null)
 			{
-				SetBackgroundImage((RadioButton)e.NewElement);
+				SetBackgroundImage((RadioControl)e.NewElement);
 			}
 			if (e.OldElement != null)
 			{
@@ -31,7 +32,7 @@ namespace RadioButton.iOS
 			}
 		}
 
-		void SetBackgroundImage(RadioButton radioButton)
+		void SetBackgroundImage(RadioControl radioButton)
 		{
 			UIImage _radioButtonImage;
 			if (radioButton.IsChecked)
@@ -54,7 +55,7 @@ namespace RadioButton.iOS
 			{
 				if (e.PropertyName.Equals("IsChecked"))
 				{
-					var radioButton = sender as RadioButton;
+					var radioButton = sender as RadioControl;
 					SetBackgroundImage(radioButton);
 				}
 			}

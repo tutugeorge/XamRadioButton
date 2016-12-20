@@ -58,7 +58,7 @@ namespace RadioButton
 				_stackLayout.Children.Clear();
 				for (int i = 0; i < value; i++)
 				{
-					_stackLayout.Children.Add(new RadioButton());
+					_stackLayout.Children.Add(new RadioControl());
 				}
 				Content = _stackLayout;
 			}
@@ -95,7 +95,7 @@ namespace RadioButton
 			_stackLayout.Children.Clear();
 			for (int i = 0; i < Count; i++)
 			{
-				_stackLayout.Children.Add(new RadioButton()
+				_stackLayout.Children.Add(new RadioControl()
 				{
 					CheckedImage = this.CheckedImage,
 					UnCheckedImage = this.UnCheckedImage,
@@ -104,11 +104,13 @@ namespace RadioButton
 			}
 			Content = _stackLayout;
 		}
+
+		 
 	}
 
-	public class RadioButton : Button
+	public class RadioControl : Button
 	{
-		public RadioButton()
+		public RadioControl()
 		{
 			var _tap = new TapGestureRecognizer();
 			_tap.Tapped += (s, e) => Tapped();
@@ -121,7 +123,7 @@ namespace RadioButton
 			BindableProperty.Create(
 				propertyName: "KeyProperty",
 				returnType: typeof(int),
-				declaringType: typeof(RadioButton),
+				declaringType: typeof(RadioControl),
 				defaultValue: 0);
 		public int Key
 		{
@@ -133,7 +135,7 @@ namespace RadioButton
 			BindableProperty.Create(
 				propertyName: "IsChecked",
 				returnType: typeof(bool),
-				declaringType: typeof(RadioButton),
+				declaringType: typeof(RadioControl),
 				defaultValue: false);
 
 		/// <summary>
@@ -193,8 +195,8 @@ namespace RadioButton
 				radioGroup.SelectedButton = Key;
 				foreach (var child in stackLayout.Children)
 				{
-					if (!(child as RadioButton).Key.Equals(Key))
-						(child as RadioButton).IsChecked = false;
+					if (!(child as RadioControl).Key.Equals(Key))
+						(child as RadioControl).IsChecked = false;
 				}
 			}
 			//else
