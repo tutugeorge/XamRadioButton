@@ -14,7 +14,8 @@ namespace RadioButton.iOS
 		{
 		}
 
-		UISwipeGestureRecognizer swipeLeft;	
+		UISwipeGestureRecognizer swipeLeft;
+		UISwipeGestureRecognizer swipeRight;
 
 		protected override void OnElementChanged(ElementChangedEventArgs<Frame> e)
 		{
@@ -25,15 +26,25 @@ namespace RadioButton.iOS
 				control.OnSwipeLeft();
 			});
 
+			swipeRight = new UISwipeGestureRecognizer(() =>
+			{
+				var control = this.Element as SwipeFrame;
+				control.OnSwipeRight();
+			});
+
+			swipeLeft.Direction = UISwipeGestureRecognizerDirection.Left;
+			swipeRight.Direction = UISwipeGestureRecognizerDirection.Right;
+
 			if (e.NewElement == null)
 			{
 				if (swipeLeft != null)
-				{
 					this.RemoveGestureRecognizer(swipeLeft);
-				}
+				if (swipeRight != null)
+					this.RemoveGestureRecognizer(swipeRight);
 			}
 			if (e.OldElement == null)
 			{
+				this.AddGestureRecognizer(swipeRight);
 				this.AddGestureRecognizer(swipeLeft);
 			}
 		}

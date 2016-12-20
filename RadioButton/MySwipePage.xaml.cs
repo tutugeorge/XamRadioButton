@@ -10,7 +10,8 @@ namespace RadioButton
 		public MySwipePage()
 		{
 			InitializeComponent();
-			sframe.SwipeLeft += async (z, o) => { await DisplayAlert("l", "g", "g"); };
+			sframe.SwipeLeft += async (z, o) => { await DisplayAlert("Swipe", "Left", "OK"); };
+			sframe.SwipeRight += async (z, o) => { await DisplayAlert("Swipe", "Right", "OK"); };
 		}
 
 

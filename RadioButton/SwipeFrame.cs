@@ -16,5 +16,10 @@ namespace RadioButton
 				SwipeLeft(this, null);
 		}
 		public event EventHandler SwipeRight;
+		public void OnSwipeRight()
+		{
+			if (SwipeRight != null)
+				SwipeRight(this, null);
+		}
 	}
 }
