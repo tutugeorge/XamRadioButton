@@ -22,22 +22,33 @@ namespace RadioButton
 			AddHeaderTabs();
 		}
 
+		#region events
 		public event EventHandler TabChanged;
 		public void OnTabChanged()
 		{
 			if (TabChanged != null)
+			{
 				TabChanged(this, null);
-		}
-
-		private SwipeFrame _tabLayout;
-		public SwipeFrame TabLayout
-		{
-			set 
-			{ 
-				_tabLayout = value;
-				UpdateBodyLayout();
+				UpdateSwipeFrameLayout();
 			}
 		}
+		#endregion
+
+		#region Properties
+		public static readonly BindableProperty ItemTemplateProperty =
+			BindableProperty.Create(
+				propertyName: "ItemTemplate",
+				declaringType: typeof(TabView),
+				returnType: typeof(DataTemplate)
+			);
+		public DataTemplate ItemTemplate
+		{
+			get { return (DataTemplate)GetValue(ItemTemplateProperty); }
+			set { SetValue(ItemTemplateProperty, value); }
+		}
+
+		//TODO
+		//Bindable Property for Selected Tab button
 
 		private IEnumerable _itemSource;
 		public IEnumerable ItemSource
@@ -49,17 +60,79 @@ namespace RadioButton
 				UpdateLayout();
 			}
 		}
+		private SwipeFrame _tabLayout;
+		public SwipeFrame TabLayout
+		{
+			set
+			{
+				_tabLayout = value;
+				//UpdateBodyLayout();
+				//UpdateSwipeFrameLayout();
+			}
+		}
+		#endregion
+
+		private void InitHeaderLayout()
+		{
+			var layout = new StackLayout();
+			layout.BackgroundColor = Color.Gray;
+			layout.Orientation = StackOrientation.Horizontal;
+			layout.HorizontalOptions = LayoutOptions.CenterAndExpand;
+			Children.Add(layout, 0, 0);
+		}
+
+		private void InitBodyLayout()
+		{
+			var layout = new SwipeFrame();
+			layout.BackgroundColor = Color.Silver;
+			Children.Add(layout, 0, 1);
+		}
 
 		private void UpdateLayout()
 		{
 			if (_itemSource != null)
 			{
+				ClearTabsHeader();
 				foreach (var item in _itemSource)
 				{
-					var type = item.GetType();
-
+					AddButtonTabsToHeader();
 				}
 			}
+		}
+
+		private void ClearTabsHeader()
+		{
+			var headerLayout = Children[0] as StackLayout;
+			headerLayout.Children.Clear();
+		}
+
+		private void AddButtonTabsToHeader()
+		{
+			var btn = new TabButton() { Text = "Btn1", BackgroundColor = Color.Accent };
+			var headerLayout = Children[0] as StackLayout;
+			headerLayout.Children.Add(btn);
+		}
+
+		private void UpdateBodyLayout()
+		{
+			Children.RemoveAt(1);
+			//Define data template 
+			//update ui
+			Children.Add(_tabLayout, 0, 1);
+		}
+
+		private void UpdateSwipeFrameLayout()
+		{
+			var content = ItemTemplate.CreateContent();
+			var view = content as Xamarin.Forms.View;
+			if (view == null)
+				throw new InvalidOperationException($"DataTemplate returned non-view content: '{content}'.");
+
+			view.Parent = this;
+
+			Children.RemoveAt(1);
+			_tabLayout = view as SwipeFrame;
+			Children.Add(_tabLayout, 0, 1);
 		}
 
 		//public static readonly BindableProperty HeaderHeightProperty =
@@ -85,27 +158,9 @@ namespace RadioButton
 			headerLayout.Children.Add(btn3);
 		}
 
-		private void InitHeaderLayout()
-		{
-			var layout = new StackLayout();
-			layout.BackgroundColor = Color.Gray;
-			layout.Orientation = StackOrientation.Horizontal;
-			layout.HorizontalOptions = LayoutOptions.CenterAndExpand;
-			Children.Add(layout, 0, 0);
-		}
 
-		private void InitBodyLayout()
-		{
-			var layout = new SwipeFrame();
-			layout.BackgroundColor = Color.Silver;
-			Children.Add(layout, 0, 1);
-		}
 
-		private void UpdateBodyLayout()
-		{
-			Children.RemoveAt(1);
-			Children.Add(_tabLayout, 0, 1);
-		}
+
 	}
 
 	public class TabButton : Button
@@ -126,6 +181,8 @@ namespace RadioButton
 			}
 			this.IsSelected = true;
 			this.BackgroundColor = Color.White;
+			//TODO
+			//Update selcted tab button on parent tab
 			tab.OnTabChanged();
 		}
 
