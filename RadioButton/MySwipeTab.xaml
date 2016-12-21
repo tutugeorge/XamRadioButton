@@ -3,7 +3,7 @@
 		x:Class="RadioButton.MySwipeTab"
 		xmlns:controls="clr-namespace:RadioButton;assembly=RadioButton">
 	<ContentPage.Content>
-		<controls:TabView>
+		<controls:TabView x:Name="tab">
 			
 		</controls:TabView>
 	</ContentPage.Content>
