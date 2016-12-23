@@ -49,6 +49,18 @@ namespace RadioButton
 
 		//TODO
 		//Bindable Property for Selected Tab button
+		public static readonly BindableProperty SelectedItemProperty =
+			BindableProperty.Create(
+				propertyName: "SelectedItem",
+				returnType: typeof(TabButton),
+				declaringType: typeof(TabView),
+				propertyChanged: (bindable, oldValue, newValue) => { }
+			);
+		public TabButton SelectedItem
+		{
+			get { return (TabButton)GetValue(SelectedItemProperty); }
+			set { SetValue(SelectedItemProperty, value); }
+		}
 
 		private IEnumerable _itemSource;
 		public IEnumerable ItemSource
@@ -129,9 +141,10 @@ namespace RadioButton
 				throw new InvalidOperationException($"DataTemplate returned non-view content: '{content}'.");
 
 			view.Parent = this;
-
+			view.BindingContext = _itemSource.GetEnumerator().Current;
 			Children.RemoveAt(1);
-			_tabLayout = view as SwipeFrame;
+			_tabLayout = new SwipeFrame();
+			_tabLayout.Content = view;
 			Children.Add(_tabLayout, 0, 1);
 		}
 
@@ -183,6 +196,7 @@ namespace RadioButton
 			this.BackgroundColor = Color.White;
 			//TODO
 			//Update selcted tab button on parent tab
+			tab.SelectedItem = this;
 			tab.OnTabChanged();
 		}
 

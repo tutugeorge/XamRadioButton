@@ -13,14 +13,14 @@ namespace RadioButton
 			tab.TabChanged += (sender, e) => { foo(sender, e); };
 			tab.ItemSource = new List<Boo>()
 			{
-				new Boo(){ Obj1 = "one", Obj2 = 1},
-				new Boo(){ Obj1 = "two", Obj2 = 2}
+				new Boo(){ Obj1 = "one", Obj2 = "1"},
+				new Boo(){ Obj1 = "two", Obj2 = "2"}
 			};
 		}
 
 		void foo(object sender, EventArgs e)
 		{
-			tab.TabLayout = new SwipeFrame() { BackgroundColor = Color.Purple };
+			//tab.TabLayout = new SwipeFrame() { BackgroundColor = Color.Purple };
 		}
 	}
 
@@ -31,7 +31,7 @@ namespace RadioButton
 			get;
 			set;
 		}
-		public int Obj2
+		public string Obj2
 		{
 			get;
 			set;

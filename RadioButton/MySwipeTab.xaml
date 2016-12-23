@@ -4,7 +4,14 @@
 		xmlns:controls="clr-namespace:RadioButton;assembly=RadioButton">
 	<ContentPage.Content>
 		<controls:TabView x:Name="tab">
-			
+			<controls:TabView.ItemTemplate>
+				<DataTemplate>
+					<StackLayout BackgroundColor="Black">
+						<Label Text="{Binding Obj1}" TextColor="White"></Label>
+						<Label Text="{Binding Obj2}" TextColor="White"></Label>
+					</StackLayout>>
+				</DataTemplate>
+			</controls:TabView.ItemTemplate>
 		</controls:TabView>
 	</ContentPage.Content>
 </ContentPage>
