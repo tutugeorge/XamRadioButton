@@ -130,7 +130,7 @@ namespace RadioButton
 			Children.RemoveAt(1);
 			//Define data template 
 			//update ui
-			Children.Add(_tabLayout, 0, 1);
+			Children.Add(_tabLayout, 0, 1); 
 		}
 
 		private void UpdateSwipeFrameLayout()
