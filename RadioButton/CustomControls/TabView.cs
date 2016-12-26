@@ -225,7 +225,7 @@ namespace RadioButton
 			{
 				if ((SelectedIndex - 1) < 0)
 					return ;// SelectedIndex = _count;
-				SelectedIndex--; 
+				SelectedIndex--;  
 			};
 			_tabLayout.Content = view;
 			Children.Add(_tabLayout, 0, 1);
