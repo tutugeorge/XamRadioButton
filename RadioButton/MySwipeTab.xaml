@@ -3,15 +3,22 @@
 		x:Class="RadioButton.MySwipeTab"
 		xmlns:controls="clr-namespace:RadioButton;assembly=RadioButton">
 	<ContentPage.Content>
-		<controls:TabView x:Name="tab">
+		<controls:TabView x:Name="tab" SelectedIndex="0">
 			<controls:TabView.ItemTemplate>
 				<DataTemplate>
 					<StackLayout BackgroundColor="Black">
 						<Label Text="{Binding Obj1}" TextColor="White"></Label>
 						<Label Text="{Binding Obj2}" TextColor="White"></Label>
-					</StackLayout>>
+					</StackLayout>
 				</DataTemplate>
 			</controls:TabView.ItemTemplate>
+			<controls:TabView.TabTemplate>
+				<DataTemplate>
+					<StackLayout BackgroundColor="Green">
+						<Button Text="{Binding header}" TextColor="White"></Button>
+					</StackLayout>
+				</DataTemplate>
+			</controls:TabView.TabTemplate>
 		</controls:TabView>
 	</ContentPage.Content>
 </ContentPage>

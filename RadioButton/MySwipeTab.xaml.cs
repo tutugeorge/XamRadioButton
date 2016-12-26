@@ -11,10 +11,17 @@ namespace RadioButton
 		{
 			InitializeComponent();
 			tab.TabChanged += (sender, e) => { foo(sender, e); };
+
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
 			tab.ItemSource = new List<Boo>()
 			{
-				new Boo(){ Obj1 = "one", Obj2 = "1"},
-				new Boo(){ Obj1 = "two", Obj2 = "2"}
+				new Boo(){ Obj1 = "one", Obj2 = "1", header ="button1"},
+				new Boo(){ Obj1 = "two", Obj2 = "2", header ="button2"},
+				new Boo(){ Obj1 = "three", Obj2 = "3", header="button3"}
 			};
 		}
 
@@ -26,6 +33,10 @@ namespace RadioButton
 
 	public class Boo
 	{
+		public string header
+		{
+			get; set;
+		}
 		public string Obj1
 		{
 			get;

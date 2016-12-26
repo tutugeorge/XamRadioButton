@@ -53,7 +53,7 @@
     <Compile Include="MySwipeTab.xaml.cs">
       <DependentUpon>MySwipeTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TabView.cs" />
+    <Compile Include="CustomControls\TabView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
